@@ -1,31 +1,25 @@
-n, r, c = map(int, input().split())
-a = [[0] * (n + 1) for _ in range(n + 1)]
+n, row_idx, col_idx = map(int, input().split())
+row_idx -= 1
+col_idx -= 1
+total_map = []
+for _ in range(n):
+    total_map.append(list(map(int, input().split())))
 
-for i in range(1, n + 1):
-    row = list(map(int, input().split()))
-    for j in range(1, n + 1):
-        a[i][j] = row[j - 1]
-
-# Please write your code here.
+finish = False
 dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
-finish = False
-print(a[r][c], end=" ")
-last = a[r][c]
+print(total_map[row_idx][col_idx], end=" ")
 while not finish:
-    cur_num = a[r][c]
-    ok = False
-    if n == 1:
-        finish = True
-    else:
-        for idx in range(4):
-            if (r+dx[idx]) < 1 or (r+dx[idx]) > n or (c+dy[idx]) < 1 or (c+dy[idx]) > n:
-                continue
-            if cur_num < a[r+dx[idx]][c+dy[idx]]:
-                r = r + dx[idx]
-                c = c + dy[idx]
-                print(a[r][c], end=" ")
-                ok = True
+    changed = False
+    for idx in range(4):
+        next_x = row_idx + dx[idx]
+        next_y = col_idx + dy[idx]
+        if next_x >= 0 and next_x < n and next_y >= 0 and next_y < n:
+            if total_map[row_idx][col_idx] < total_map[next_x][next_y]:
+                row_idx = next_x
+                col_idx = next_y
+                print(total_map[row_idx][col_idx], end=" ")
+                changed = True
                 break
-            if idx == 3 and not ok:
-                finish = True
+    if not changed:
+        finish = True
