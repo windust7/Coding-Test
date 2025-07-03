@@ -15,14 +15,17 @@ last = a[r][c]
 while not finish:
     cur_num = a[r][c]
     ok = False
-    for idx in range(4):
-        if (r+dx[idx]) < 1 or (r+dx[idx]) > n or (c+dy[idx]) < 1 or (c+dy[idx]) > n:
-            continue
-        if cur_num < a[r+dx[idx]][c+dy[idx]]:
-            r = r + dx[idx]
-            c = c + dy[idx]
-            print(a[r][c], end=" ")
-            ok = True
-            break
-        if idx == 3 and not ok:
-            finish = True
+    if n == 1:
+        finish = True
+    else:
+        for idx in range(4):
+            if (r+dx[idx]) < 1 or (r+dx[idx]) > n or (c+dy[idx]) < 1 or (c+dy[idx]) > n:
+                continue
+            if cur_num < a[r+dx[idx]][c+dy[idx]]:
+                r = r + dx[idx]
+                c = c + dy[idx]
+                print(a[r][c], end=" ")
+                ok = True
+                break
+            if idx == 3 and not ok:
+                finish = True
