@@ -22,7 +22,8 @@ for turn_idx in range(total_turn):
     for ball_idx in range(len(ball_coords)):
         cur_row = ball_coords[ball_idx][0]
         cur_col = ball_coords[ball_idx][1]
-        next_num = total_map[cur_row][cur_col]
+        # next_num = total_map[cur_row][cur_col]
+        next_num = -int(1e9)
         changed = False
         for idx in range(4):
             next_row = cur_row + dx[idx]
