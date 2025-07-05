@@ -22,7 +22,7 @@ if which_side == 0:
 elif which_side == 1:
     cur_col = map_size - 1
     cur_row = start_num - map_size
-    cur_dir = 3
+    cur_dir = 2
 elif which_side == 2:
     cur_row = start_num - 1
     cur_col = map_size * 3 - start_num
@@ -30,7 +30,7 @@ elif which_side == 2:
 elif which_side == 3:
     cur_col = 0
     cur_row = map_size * 4 - start_num
-    cur_dir = 2
+    cur_dir = 3
 
 result = 0
 first = True
