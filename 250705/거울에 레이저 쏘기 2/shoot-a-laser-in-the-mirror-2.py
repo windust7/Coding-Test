@@ -23,7 +23,7 @@ elif (map_size + 1) <= start_num <= (2 * map_size):
     cur_row = start_num - map_size - 1
     cur_dir = 2
 elif (2 * map_size + 1) <= start_num <= (3 * map_size):
-    cur_row = start_num - 1
+    cur_row = map_size - 1
     cur_col = map_size * 3 - start_num
     cur_dir = 0
 elif (3 * map_size + 1) <= start_num <= (4 * map_size):
