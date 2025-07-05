@@ -14,4 +14,4 @@ for command in commands:
         row += dx[direction]
         col += dy[direction]
 
-print(f"{col} {row}")
+print(f"{col} {-row}")
