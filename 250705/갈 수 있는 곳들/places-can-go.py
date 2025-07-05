@@ -10,10 +10,11 @@ for _ in range(num_candidate):
     row_idx, col_idx = map(int, input().split())
     candidate_list.append([row_idx-1, col_idx-1])
 
+visited = [[False] * map_size for _ in range(map_size)]
+
 def bfs(row_idx, col_idx):
     dx = [1, -1, 0, 0]
     dy = [0, 0, 1, -1]
-    visited = [[False] * map_size for _ in range(map_size)]
     queue = deque([[row_idx, col_idx]])
     visited[row_idx][col_idx] = True
     while queue:
@@ -26,19 +27,13 @@ def bfs(row_idx, col_idx):
                 and total_map[next_row][next_col] == 0:
                 visited[next_row][next_col] = True
                 queue.append([next_row, next_col])
-    return visited
 
-total_visited = [[False] * map_size for _ in range(map_size)]
 for candidate in candidate_list:
-    cur_visited = bfs(candidate[0], candidate[1])
-    for i in range(map_size):
-        for j in range(map_size):
-            if cur_visited[i][j]:
-                total_visited[i][j] = True
+    bfs(candidate[0], candidate[1])
 
 result = 0
 for i in range(map_size):
     for j in range(map_size):
-        if total_visited[i][j]:
+        if visited[i][j]:
             result += 1
 print(result)
