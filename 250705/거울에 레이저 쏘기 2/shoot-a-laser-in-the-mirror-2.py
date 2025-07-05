@@ -18,31 +18,25 @@ which_side = (start_num-1) // map_size
 if which_side == 0:
     cur_row = 0
     cur_col = start_num - 1
-    cur_first_dir = 1
-    cur_second_dir = 1
+    cur_dir = 1
 elif which_side == 1:
     cur_col = map_size - 1
     cur_row = start_num - map_size
-    cur_first_dir = 3
-    cur_second_dir = 2
+    cur_dir = 3
 elif which_side == 2:
     cur_row = start_num - 1
     cur_col = map_size * 3 - start_num
-    cur_first_dir = 0
-    cur_second_dir = 0
+    cur_dir = 0
 elif which_side == 3:
     cur_col = 0
     cur_row = map_size * 4 - start_num
-    cur_first_dir = 2
-    cur_second_dir = 3
+    cur_dir = 2
 
 result = 0
 first = True
 while cur_row >= 0 and cur_row < map_size and cur_col >= 0 and cur_col < map_size:
     # print(f"{cur_row}, {cur_col}")
     result += 1
-    if result == 1:
-        cur_dir = cur_first_dir
     if total_map[cur_row][cur_col] == "/":
         dx = first_dx
         dy = first_dy
