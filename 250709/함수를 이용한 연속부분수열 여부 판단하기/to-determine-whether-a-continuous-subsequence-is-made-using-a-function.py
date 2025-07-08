@@ -14,7 +14,7 @@ result = False
 
 if len(a) < len(b):
     print("No")
-if len(a) == len(b):
+elif len(a) == len(b):
     _check = True
     for idx in range(len(b)):
         if a[idx] != b[idx]:
