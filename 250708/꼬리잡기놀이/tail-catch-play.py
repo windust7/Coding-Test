@@ -154,10 +154,10 @@ def cal_score(row_idx, col_idx):
                 visited[next_row_idx][next_col_idx] = True
                 result_tuple_2 = dfs(next_row_idx, next_col_idx, 2, visited)
         if result_tuple[1] == 1:
-            score = result_tuple[0] ** 2
+            score = (result_tuple[0]+1) ** 2
             head_row, head_col = result_tuple[-2], result_tuple[-1]
         else:
-            score = result_tuple_2[0] ** 2
+            score = (result_tuple_2[0]+1) ** 2
             head_row, head_col = result_tuple_2[-2], result_tuple_2[-1]
 
     for idx in range(len(team_header_list)):
@@ -193,8 +193,10 @@ for turn_idx in range(total_turn):
         ball_dir = 3
     hitted, score_row, score_col = move_ball(start_ball_row, start_ball_col, ball_dir)
     if hitted:
-        result += cal_score(score_row, score_col)
-    # 
+        plus_score = cal_score(score_row, score_col)
+        result += plus_score
+
+    # print(hitted, plus_score)
     # for row in total_map:
     #     print(row)
     # print()
