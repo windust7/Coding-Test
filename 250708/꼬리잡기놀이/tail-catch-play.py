@@ -153,6 +153,7 @@ def cal_score(row_idx, col_idx):
             visited[next_row_idx][next_col_idx]:
                 visited[next_row_idx][next_col_idx] = True
                 result_tuple_2 = dfs(next_row_idx, next_col_idx, 2, visited)
+                break
         if result_tuple[1] == 1:
             score = (result_tuple[0]+1) ** 2
             head_row, head_col = result_tuple[-2], result_tuple[-1]
