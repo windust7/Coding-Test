@@ -82,13 +82,14 @@ def move_forward():
 def move_ball(ball_row, ball_col, ball_dir):
     hit = False
     hit_row, hit_col = None, None
+    if total_map[ball_row][ball_col] == 1 or total_map[ball_row][ball_col] == 2 or total_map[ball_row][ball_col] == 3:
+        return True, ball_row, ball_col
     while True:
         ball_row += dx[ball_dir]
         ball_col += dy[ball_dir]
         if not in_range(ball_row, ball_col):
             break
-        if total_map[ball_row][ball_col] == 1 or total_map[ball_row][ball_col] == 2 or total_map[ball_row][
-            ball_col] == 3:
+        if total_map[ball_row][ball_col] == 1 or total_map[ball_row][ball_col] == 2 or total_map[ball_row][ball_col] == 3:
             hit = True
             hit_row, hit_col = ball_row, ball_col
             break
@@ -115,7 +116,6 @@ def cal_score(row_idx, col_idx):
                         total_map[next_row_idx][next_col_idx] != 0:
                     result_tuple = dfs(next_row_idx, next_col_idx, cur_depth + 1, cur_visited)
             return result_tuple
-    # breakpoint()
     if total_map[cur_row][cur_col] == 1:
         visited = [[False] * map_size for _ in range(map_size)]
         visited[cur_row][cur_col] = True
@@ -154,11 +154,12 @@ def cal_score(row_idx, col_idx):
                 visited[next_row_idx][next_col_idx] = True
                 result_tuple_2 = dfs(next_row_idx, next_col_idx, 2, visited)
                 break
+        # breakpoint()
         if result_tuple[1] == 1:
-            score = (result_tuple[0]+1) ** 2
+            score = (result_tuple[0]) ** 2
             head_row, head_col = result_tuple[-2], result_tuple[-1]
         else:
-            score = (result_tuple_2[0]+1) ** 2
+            score = (result_tuple_2[0]) ** 2
             head_row, head_col = result_tuple_2[-2], result_tuple_2[-1]
 
     for idx in range(len(team_header_list)):
@@ -197,7 +198,7 @@ for turn_idx in range(total_turn):
         plus_score = cal_score(score_row, score_col)
         result += plus_score
 
-    # print(hitted, plus_score)
+    # print(turn_idx, hitted, plus_score)
     # for row in total_map:
     #     print(row)
     # print()
