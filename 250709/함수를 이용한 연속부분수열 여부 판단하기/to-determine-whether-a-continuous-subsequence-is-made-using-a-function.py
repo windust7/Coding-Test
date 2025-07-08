@@ -17,7 +17,7 @@ if len(a) < len(b):
 if len(a) == len(b):
     _check = True
     for idx in range(len(b)):
-        if a[idx] == b[idx]:
+        if a[idx] != b[idx]:
             _check = False
     if _check:
         print("Yes")
