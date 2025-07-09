@@ -13,7 +13,6 @@ c년만큼 유지하고 사라짐. 다시 뿌리면 다시 c년동안
 1. 나무 성장
 2. 나무 번식
 3. 제초제 뿌리기
-4. 시간 지난 제초제 해제
 
 """
 
@@ -133,7 +132,7 @@ def kill_start():
                 cur_max_col = col_idx
                 cur_max = tmp[row_idx][col_idx]
 
-    if total_map[cur_max_row][cur_max_col] == 0:
+    if total_map[cur_max_row][cur_max_col] <= 0:
         return 0
     else:
         result += total_map[cur_max_row][cur_max_col]
@@ -161,7 +160,7 @@ for turn_idx in range(total_turn):
     tree_grow()
     tree_spread()
     result += kill_start()
-#     print(f"cumulated kill: {result}")
+    # print(f"cumulated kill: {result}")
 
 # visualize()
 print(result)
