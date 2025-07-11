@@ -92,8 +92,7 @@ for testcase_idx in range(total_testcase):
         max_x = max(max_x, int(cur_ball_info[0]))
         min_y = min(min_y, int(cur_ball_info[1]))
         max_y = max(max_y, int(cur_ball_info[1]))
-        cur_ball_info_list = [int(cur_ball_info[0]), int(cur_ball_info[1]), int(cur_ball_info[2]), cur_ball_dir,
-                              ball_idx]  # x, y, weight, direction, ball_idx
+        cur_ball_info_list = [int(cur_ball_info[0]), int(cur_ball_info[1]), int(cur_ball_info[2]), cur_ball_dir, ball_idx]  # x, y, weight, direction, ball_idx
         ball_list.append(cur_ball_info_list)
     for ball_idx, cur_ball_list in enumerate(ball_list):
         cur_ball_list[0] = min_x + (cur_ball_list[0] - min_x) * 2
@@ -120,4 +119,4 @@ for testcase_idx in range(total_testcase):
     print(result)
     del tmp_map
     del ball_list
-    
+    del total_ball
