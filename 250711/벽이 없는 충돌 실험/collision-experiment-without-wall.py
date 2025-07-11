@@ -119,3 +119,5 @@ for testcase_idx in range(total_testcase):
         # print(time.time()-now)
     print(result)
     del tmp_map
+    del cur_ball_info
+    
