@@ -118,3 +118,4 @@ for testcase_idx in range(total_testcase):
             break
         # print(time.time()-now)
     print(result)
+    del tmp_map
