@@ -63,6 +63,9 @@ def move(ball_list, min_x, max_x, min_y, max_y):
                         for idx, _ball_list in enumerate(next_ball_list):
                             if _ball_list[-1] == other_ball_idx:
                                 next_ball_list[idx] = [next_x, next_y, cur_weight, cur_dir, cur_idx]
+
+    for _ball_list in next_ball_list:
+        tmp_map[max_y - _ball_list[1]][_ball_list[0] - min_x] = "x"
     # print(time.time()-now)
 
     # for y in range(max_y - min_y + 1):
