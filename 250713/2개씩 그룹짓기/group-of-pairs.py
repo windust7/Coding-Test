@@ -9,7 +9,7 @@ nums.sort(reverse=True)
 
 _max = -int(1e9)
 
-for idx in range(n//2+1):
+for idx in range(n):
     _max = max(_max, original[idx]+nums[idx])
 
 print(_max)
