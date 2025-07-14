@@ -153,6 +153,8 @@ def pick_box(w_max):
     for belt_idx, belt in enumerate(belt_list):
         if belt.is_broken:
             continue
+        if belt.node_num == 0:
+            continue
         if belt.front()[1] <= w_max:
             cur_id, cur_weight = belt.pop_front()
             result_list.append(cur_weight)
@@ -198,7 +200,7 @@ def check_box(f_id):
                 cur_belt.tail.next = None
                 prev_head.prev = prev_tail
                 prev_tail.next = prev_head
-            return belt_idx + 1
+                return belt_idx + 1
     return -1
 
 
