@@ -161,7 +161,7 @@ def pick_box(w_max):
             belt_dict_list[belt_idx].pop(cur_id)
         else:
             cur_id, cur_weight = belt.pop_front()
-            belt.push_back(cur_id, cur_weight)
+            belt.push_back(cur_id, cur_weight, belt_idx)
     return sum(result_list)
 
 
