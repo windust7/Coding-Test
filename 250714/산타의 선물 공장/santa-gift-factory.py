@@ -71,7 +71,7 @@ class DoublyLinkedList:
 
         self.node_num += 1
 
-    def push_back(self, new_id, new_weight, belt_idx=None):
+    def push_back(self, new_id, new_weight, belt_idx):
         new_node = Node(new_id, new_weight)
         new_node.prev = self.tail
         new_node.next = None
@@ -84,8 +84,7 @@ class DoublyLinkedList:
 
         self.node_num += 1
 
-        if belt_idx is not None:
-            belt_dict_list[belt_idx][new_id] = new_node
+        belt_dict_list[belt_idx][new_id] = new_node
 
     def pop_front(self):
         if self.head == None:
