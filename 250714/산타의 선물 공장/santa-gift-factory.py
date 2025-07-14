@@ -220,7 +220,7 @@ def broken_belt(b_num):
         move_belt.tail = broken_belt.tail
         move_belt.node_num += broken_belt.node_num
         move_belt_dict = belt_dict_list[broken_belt_idx]
-        for _key in broken_belt_dict:
+        for _key in broken_belt_dict.keys():
             move_belt_dict[_key] = broken_belt_dict[_key]
         return b_num
     else:
