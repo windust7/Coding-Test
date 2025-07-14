@@ -89,7 +89,7 @@ class DoublyLinkedList:
 
     def pop_front(self):
         if self.head == None:
-            print(f"Doubly Linked List is empty")
+            return None
         elif self.node_num == 1:
             tmp = self.head
             self.head = None
@@ -106,7 +106,7 @@ class DoublyLinkedList:
 
     def pop_back(self):
         if self.tail == None:
-            print(f"Doubly Linked List is empty")
+            return None
         elif self.node_num == 1:
             tmp = self.tail
             self.tail = None
@@ -123,13 +123,13 @@ class DoublyLinkedList:
 
     def front(self):
         if self.head == None:
-            print(f"Doubly Linked List is empty")
+            return None
         else:
             return self.head.id, self.head.weight
 
     def back(self):
         if self.tail == None:
-            print(f"Doubly Linked List is empty")
+            return None
         else:
             return self.tail.id, self.tail.weight
 
@@ -153,9 +153,9 @@ def pick_box(w_max):
     for belt_idx, belt in enumerate(belt_list):
         if belt.is_broken:
             continue
-        if belt.node_num == 0:
+        if belt.head is None:
             continue
-        if belt.front()[1] <= w_max:
+        if belt.head.weight <= w_max:
             cur_id, cur_weight = belt.pop_front()
             result_list.append(cur_weight)
             belt_dict_list[belt_idx].pop(cur_id)
