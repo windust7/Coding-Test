@@ -49,6 +49,28 @@ for person_idx in range(people_num):
 def in_range(row_idx, col_idx):
     return 0 <= row_idx < map_size and 0 <= col_idx < map_size
 
+def visualize(time):
+    print(f"time: {time}\n")
+    print_map = [[None] * map_size for _ in range(map_size)]
+    for row_idx in range(map_size):
+        for col_idx in range(map_size):
+            print_map[row_idx][col_idx] = total_map[row_idx][col_idx]
+            if print_map[row_idx][col_idx] == 1:
+                print_map[row_idx][col_idx] = "B"
+            if [row_idx, col_idx] in target_list:
+                print_map[row_idx][col_idx] = f"T{target_list.index([row_idx, col_idx])}"
+            if [row_idx, col_idx] in people_list:
+                print_map[row_idx][col_idx] = f"P{people_list.index([row_idx, col_idx])}"
+            if unavailable_map[row_idx][col_idx]:
+                print_map[row_idx][col_idx] = "X"
+    for row in print_map:
+        print("\t".join(map(str, row)))
+    print()
+    print(people_succeed)
+    print()
+
+    print("==========")
+
 dx = [-1, 0, 0, 1]
 dy = [0, -1, 1, 0]
 
@@ -56,11 +78,13 @@ unavailable_map = [[False] * map_size for _ in range(map_size)]
 
 current_time = 0
 while True:
+    # visualize(current_time)
     current_time += 1
 
     # 1번 움직임
     if current_time > 1:
         people_move_plan = [None for _ in range(people_num)]
+        people_min_dist = [None for _ in range(people_num)]
         for person_idx, person in enumerate(people_list):
             if not people_succeed[person_idx]:
                 found = False
@@ -74,19 +98,21 @@ while True:
                     cur_row, cur_col = cur_node[0], cur_node[1]
                     for idx in range(4):
                         next_row, next_col = cur_row + dx[idx], cur_col + dy[idx]
-                        if in_range(next_row, next_col) and visited[next_row][next_col] == 0 and not ((next_row, next_col) == (target_list[person_idx][0], target_list[person_idx][1])) and not unavailable_map[next_row][next_col]:
+                        if in_range(next_row, next_col) and visited[next_row][next_col] == 0 and not ((next_row, next_col) == (target_list[person_idx][0], target_list[person_idx][1])) and (not unavailable_map[next_row][next_col] or (next_row, next_col) == (target_row, target_col)):
                             visited[next_row][next_col] = visited[cur_row][cur_col] + 1
                             if next_row == target_row and next_col == target_col:
                                 found = True
                                 if min_dist is None:
-                                    min_dist = visited[next_row][next_col]
+                                    min_dist = visited[cur_row][cur_col]
                             else:
                                 if not found:
                                     queue.append([next_row, next_col])
                                 else:
-                                    if visited[next_row][next_col] < min_dist:
+                                    if visited[cur_row][cur_col] < min_dist:
                                         queue.append([next_row, next_col])
             people_move_plan[person_idx] = visited
+            people_min_dist[person_idx] = min_dist
+        # breakpoint()
         for person_idx, person in enumerate(people_list):
             if not people_succeed[person_idx]:
                 my_move_plan = people_move_plan[person_idx]
@@ -94,7 +120,7 @@ while True:
                 cur_row, cur_col = person[0], person[1]
                 for idx in range(4):
                     next_row, next_col = cur_row + dx[idx], cur_col + dy[idx]
-                    if in_range(next_row, next_col) and (my_move_plan[next_row][next_col] > 0 or (next_row, next_col) == (target_row, target_col)):
+                    if in_range(next_row, next_col) and ((my_move_plan[next_row][next_col] == (people_min_dist[person_idx]) and people_min_dist[person_idx] != 0) or (next_row, next_col) == (target_row, target_col)) and not unavailable_map[next_row][next_col]:
                         people_list[person_idx] = [next_row, next_col]
                         break
 
@@ -112,6 +138,7 @@ while True:
         cur_target = target_list[current_time-1]
         cur_target_row, cur_target_col = cur_target[0], cur_target[1]
         road_to_basecamp = [[0] * map_size for _ in range(map_size)]
+        check_min_dist = None
         queue = deque([[cur_target_row, cur_target_col]])
         found = False
         min_dist = None
@@ -132,9 +159,10 @@ while True:
                         else:
                             if road_to_basecamp[next_row][next_col] < min_dist:
                                 queue.append([next_row, next_col])
+        check_min_dist = min_dist
         for row_idx in range(map_size):
             for col_idx in range(map_size):
-                if not unavailable_map[row_idx][col_idx] and [row_idx, col_idx] in basecamp_list and road_to_basecamp[row_idx][col_idx] != 0:
+                if not unavailable_map[row_idx][col_idx] and ([row_idx, col_idx] in basecamp_list) and road_to_basecamp[row_idx][col_idx] == check_min_dist:
                     people_list.append([row_idx, col_idx])
                     unavailable_map[row_idx][col_idx] = True
                     break
