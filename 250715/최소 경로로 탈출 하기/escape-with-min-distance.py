@@ -25,4 +25,8 @@ while queue:
         if 0 <= next_row < row_num and 0 <= next_col < col_num and visited[next_row][next_col] == 0 and total_map[next_row][next_col] == 1 and not (next_row == 0 and next_col == 0):
             visited[next_row][next_col] = visited[cur_row][cur_col] + 1
             queue.append([next_row, next_col])
-print(visited[row_num-1][col_num-1])
+
+if visited[row_num-1][col_num-1] == 0:
+    print(-1)
+else:
+    print(visited[row_num-1][col_num-1])
