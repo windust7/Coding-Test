@@ -74,6 +74,8 @@ def L(iterator):
 def R(iterator):
     if iterator == NULL_NODE:
         return NULL_NODE
+    elif iterator == dll.tail:
+        return NULL_NODE
     else:
         return iterator.next
 
