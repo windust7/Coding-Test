@@ -12,12 +12,14 @@ for cur_idx in range(6):
         next_list = [[] for _ in range(10)]
         for cur_list_idx in cur_list:
             for item in cur_list_idx:
-                next_list_idx = str(item % (10 ** (cur_idx+1)))[0]
+                next_list_idx = str(item % (10 ** (cur_idx+1)))
                 if len(next_list_idx) < (cur_idx+1):
                     next_list_idx = 0
-                next_list_idx = int(str(item % (10 ** (cur_idx+1)))[0])
+                else:
+                    next_list_idx = int(next_list_idx[0])
                 next_list[next_list_idx].append(item)
         cur_list = next_list
+
 
 for cur_list_idx in cur_list:
     for item in cur_list_idx:
