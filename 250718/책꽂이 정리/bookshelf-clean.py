@@ -95,7 +95,7 @@ for cmd in cmd_list:
         if dll_i.num == 0:
             pass
         elif dll_idx_i == dll_idx_j:
-            next_head = dll_i.head.next
+            # next_head = dll_i.head.next
             cur_head = dll_i.pop_front()
             # disconnect(cur_head, next_head)
             dll_i.push_back(cur_head)
@@ -107,7 +107,7 @@ for cmd in cmd_list:
                 dll_i.num -= 1
                 dll_j.num += 1
             else:
-                next_head = dll_i.head.next
+                # next_head = dll_i.head.next
                 cur_head = dll_i.pop_front()
                 # disconnect(cur_head, next_head)
                 dll_j.push_back(cur_head)
@@ -118,7 +118,7 @@ for cmd in cmd_list:
         if dll_i.num == 0:
             pass
         elif dll_idx_i == dll_idx_j:
-            next_tail = dll_i.tail.prev
+            # next_tail = dll_i.tail.prev
             cur_tail = dll_i.pop_back()
             # disconnect(next_tail, cur_tail)
             dll_i.push_front(cur_tail)
@@ -130,7 +130,7 @@ for cmd in cmd_list:
                 dll_i.num -= 1
                 dll_j.num += 1
             else:
-                next_tail = dll_i.tail.prev
+                # next_tail = dll_i.tail.prev
                 cur_tail = dll_i.pop_back()
                 dll_j.push_front(cur_tail)
                 dll_i.num -= 1
