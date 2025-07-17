@@ -125,19 +125,35 @@ for cmd in cmd_list:
             dll_j.num += 1
     elif cmd == 3:
         if dll_idx_i != dll_idx_j:
-            connect(dll_i.tail, dll_j.head)
-            dll_j.head = dll_i.head
-            dll_i.head, dll_i.tail = None, None
-            dll_j.num += dll_i.num
-            dll_i.num = 0
+            if dll_i.num == 0:
+                pass
+            elif dll_i.num == 1:
+                i_head = dll_i.pop_front()
+                dll_j.push_front(i_head)
+                dll_j.num += dll_i.num
+                dll_i.num = 0
+            else:
+                connect(dll_i.tail, dll_j.head)
+                dll_j.head = dll_i.head
+                dll_i.head, dll_i.tail = None, None
+                dll_j.num += dll_i.num
+                dll_i.num = 0
 
     elif cmd == 4:
         if dll_idx_i != dll_idx_j:
-            connect(dll_j.tail, dll_i.head)
-            dll_j.tail = dll_i.tail
-            dll_i.head, dll_i.tail = None, None
-            dll_j.num += dll_i.num
-            dll_i.num = 0
+            if dll_i.num == 0:
+                pass
+            elif dll_i.num == 1:
+                i_head = dll_i.pop_front()
+                dll_j.push_back(i_head)
+                dll_j.num += dll_i.num
+                dll_i.num = 0
+            else:
+                connect(dll_j.tail, dll_i.head)
+                dll_j.tail = dll_i.tail
+                dll_i.head, dll_i.tail = None, None
+                dll_j.num += dll_i.num
+                dll_i.num = 0
     else:
         print(f"Wrong cmd: {cmd}")
 
