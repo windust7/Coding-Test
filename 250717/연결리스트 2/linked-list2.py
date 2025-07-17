@@ -59,7 +59,7 @@ for cmd in cmd_list:
             node_j.next = node_i
     elif cmd == 3:
         node_i, node_j = node_dict[node_idx_i], node_dict[node_idx_j]
-        if node_j.next is None:
+        if node_i.next is None:
             node_j.prev = node_i
             node_i.next = node_j
         else:
