@@ -5,20 +5,23 @@ for cmd_idx in range(num_cmd):
     cur_cmd = list(map(int, input().split()))
     cmd_list.append(cur_cmd)
 
+
 class Node:
     def __init__(self, data):
         self.data = data
         self.prev = None
         self.next = None
+
     def __str__(self):
         return f"{self.data}"
+
 
 class DoublyLinkedList:
     def __init__(self):
         self.head = None
         self.tail = None
         self.num = 0
-    
+
     def push_back(self, new_node):
         if self.tail is None:
             self.head = new_node
@@ -27,7 +30,7 @@ class DoublyLinkedList:
             self.tail.next = new_node
             new_node.prev = self.tail
             self.tail = new_node
-    
+
     def push_front(self, new_node):
         if self.head is None:
             self.head = new_node
@@ -51,7 +54,7 @@ class DoublyLinkedList:
             disconnect(cur_head_node, next_head_node)
             self.head = next_head_node
             return cur_head_node
-    
+
     def pop_back(self):
         if self.num == 0:
             return None
@@ -66,14 +69,16 @@ class DoublyLinkedList:
             disconnect(next_tail_node, cur_tail_node)
             self.tail = next_tail_node
             return cur_tail_node
-            
-dll_list = [DoublyLinkedList() for _ in range(num_pocket+1)]
+
+
+dll_list = [DoublyLinkedList() for _ in range(num_pocket + 1)]
 node_dict = {}
-for node_idx in range(1, num_book+1):
+for node_idx in range(1, num_book + 1):
     cur_node = Node(node_idx)
     node_dict[node_idx] = cur_node
     dll_list[1].push_back(cur_node)
 dll_list[1].num = num_book
+
 
 def connect(front_node, back_node):
     if front_node is not None:
@@ -81,11 +86,13 @@ def connect(front_node, back_node):
     if back_node is not None:
         back_node.prev = front_node
 
+
 def disconnect(front_node, back_node):
     if front_node is not None:
         front_node.next = None
     if back_node is not None:
         back_node.prev = None
+
 
 for cmd in cmd_list:
     cmd, dll_idx_i, dll_idx_j = cmd[0], cmd[1], cmd[2]
@@ -96,10 +103,12 @@ for cmd in cmd_list:
             pass
         elif dll_i.num == 1:
             if dll_j.num == 0:
+                # breakpoint()
                 i_head = dll_i.pop_front()
                 dll_j.push_back(i_head)
                 dll_i.num -= 1
                 dll_j.num += 1
+                # breakpoint()
             elif dll_j.num == 1:
                 i_head = dll_i.pop_front()
                 dll_j.push_back(i_head)
@@ -183,6 +192,7 @@ for cmd in cmd_list:
         else:
             if dll_j.num == 0:
                 dll_j.head, dll_j.tail = dll_i.head, dll_i.tail
+                dll_i.head, dll_i.tail = None, None
                 dll_j.num = dll_i.num
                 dll_i.num = 0
             elif dll_j.num == 1:
@@ -221,6 +231,7 @@ for cmd in cmd_list:
         else:
             if dll_j.num == 0:
                 dll_j.head, dll_j.tail = dll_i.head, dll_i.tail
+                dll_i.head, dll_i.tail = None, None
                 dll_j.num = dll_i.num
                 dll_i.num = 0
             elif dll_j.num == 1:
@@ -238,7 +249,22 @@ for cmd in cmd_list:
                     dll_j.num += dll_i.num
                     dll_i.num = 0
 
-
+    # print()
+    # print(cmd, dll_idx_i, dll_idx_j)
+    # for dll in dll_list[1:]:
+    #     if dll.num == 0:
+    #         print(0)
+    #     else:
+    #         print(dll.num, end=" ")
+    #         cur_node = dll.head
+    #         while True:
+    #             print(cur_node, end=" ")
+    #             if cur_node == dll.tail:
+    #                 print()
+    #                 break
+    #             else:
+    #                 cur_node = cur_node.next
+    # print()
 
 for dll in dll_list[1:]:
     if dll.num == 0:
