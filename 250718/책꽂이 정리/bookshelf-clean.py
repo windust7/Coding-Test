@@ -101,13 +101,19 @@ for cmd in cmd_list:
             dll_i.push_back(cur_head)
             # dll_i.head = next_head
         else: 
-            next_head = dll_i.head.next
-            cur_head = dll_i.pop_front()
-            # disconnect(cur_head, next_head)
-            dll_j.push_back(cur_head)
-            # dll_i.head = next_head
-            dll_i.num -= 1
-            dll_j.num += 1
+            if dll_i.num == 1:
+                cur_head = dll_i.pop_front()
+                dll_j.push_back(cur_head)
+                dll_i.num -= 1
+                dll_j.num += 1
+            else:
+                next_head = dll_i.head.next
+                cur_head = dll_i.pop_front()
+                # disconnect(cur_head, next_head)
+                dll_j.push_back(cur_head)
+                # dll_i.head = next_head
+                dll_i.num -= 1
+                dll_j.num += 1
     elif cmd == 2:
         if dll_i.num == 0:
             pass
@@ -118,11 +124,17 @@ for cmd in cmd_list:
             dll_i.push_front(cur_tail)
             # dll_i.tail = next_tail
         else:
-            next_tail = dll_i.tail.prev
-            cur_tail = dll_i.pop_back()
-            dll_j.push_front(cur_tail)
-            dll_i.num -= 1
-            dll_j.num += 1
+            if dll_i.num == 1:
+                cur_head = dll_i.pop_front()
+                dll_j.push_front(cur_head)
+                dll_i.num -= 1
+                dll_j.num += 1
+            else:
+                next_tail = dll_i.tail.prev
+                cur_tail = dll_i.pop_back()
+                dll_j.push_front(cur_tail)
+                dll_i.num -= 1
+                dll_j.num += 1
     elif cmd == 3:
         if dll_idx_i != dll_idx_j:
             if dll_i.num == 0:
