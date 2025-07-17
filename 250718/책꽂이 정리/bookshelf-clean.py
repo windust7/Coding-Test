@@ -94,98 +94,154 @@ for cmd in cmd_list:
     if cmd == 1:
         if dll_i.num == 0:
             pass
-        elif dll_idx_i == dll_idx_j:
-            # next_head = dll_i.head.next
-            cur_head = dll_i.pop_front()
-            # disconnect(cur_head, next_head)
-            dll_i.push_back(cur_head)
-            # dll_i.head = next_head
-        else: 
-            if dll_i.num == 1:
-                cur_head = dll_i.pop_front()
-                dll_j.push_back(cur_head)
+        elif dll_i.num == 1:
+            if dll_j.num == 0:
+                i_head = dll_i.pop_front()
+                dll_j.push_back(i_head)
+                dll_i.num -= 1
+                dll_j.num += 1
+            elif dll_j.num == 1:
+                i_head = dll_i.pop_front()
+                dll_j.push_back(i_head)
                 dll_i.num -= 1
                 dll_j.num += 1
             else:
-                # next_head = dll_i.head.next
-                cur_head = dll_i.pop_front()
-                # disconnect(cur_head, next_head)
-                dll_j.push_back(cur_head)
-                # dll_i.head = next_head
+                i_head = dll_i.pop_front()
+                dll_j.push_back(i_head)
+                dll_i.num -= 1
+                dll_j.num += 1
+        else:
+            if dll_j.num == 0:
+                i_head = dll_i.pop_front()
+                dll_j.push_back(i_head)
+                dll_i.num -= 1
+                dll_j.num += 1
+            elif dll_j.num == 1:
+                i_head = dll_i.pop_front()
+                dll_j.push_back(i_head)
+                dll_i.num -= 1
+                dll_j.num += 1
+            else:
+                i_head = dll_i.pop_front()
+                dll_j.push_back(i_head)
                 dll_i.num -= 1
                 dll_j.num += 1
     elif cmd == 2:
         if dll_i.num == 0:
             pass
-        elif dll_idx_i == dll_idx_j:
-            # next_tail = dll_i.tail.prev
-            cur_tail = dll_i.pop_back()
-            # disconnect(next_tail, cur_tail)
-            dll_i.push_front(cur_tail)
-            # dll_i.tail = next_tail
-        else:
-            if dll_i.num == 1:
-                cur_head = dll_i.pop_front()
-                dll_j.push_front(cur_head)
+        elif dll_i.num == 1:
+            if dll_j.num == 0:
+                i_tail = dll_i.pop_back()
+                dll_j.push_front(i_tail)
+                dll_i.num -= 1
+                dll_j.num += 1
+            elif dll_j.num == 1:
+                i_tail = dll_i.pop_back()
+                dll_j.push_front(i_tail)
                 dll_i.num -= 1
                 dll_j.num += 1
             else:
-                # next_tail = dll_i.tail.prev
-                cur_tail = dll_i.pop_back()
-                dll_j.push_front(cur_tail)
+                i_tail = dll_i.pop_back()
+                dll_j.push_front(i_tail)
+                dll_i.num -= 1
+                dll_j.num += 1
+        else:
+            if dll_j.num == 0:
+                i_tail = dll_i.pop_back()
+                dll_j.push_front(i_tail)
+                dll_i.num -= 1
+                dll_j.num += 1
+            elif dll_j.num == 1:
+                i_tail = dll_i.pop_back()
+                dll_j.push_front(i_tail)
+                dll_i.num -= 1
+                dll_j.num += 1
+            else:
+                i_tail = dll_i.pop_back()
+                dll_j.push_front(i_tail)
                 dll_i.num -= 1
                 dll_j.num += 1
     elif cmd == 3:
-        if dll_idx_i != dll_idx_j:
-            if dll_i.num == 0:
-                pass
-            elif dll_i.num == 1:
+        if dll_i.num == 0:
+            pass
+        elif dll_i.num == 1:
+            if dll_j.num == 0:
                 i_head = dll_i.pop_front()
                 dll_j.push_front(i_head)
-                dll_j.num += dll_i.num
-                dll_i.num = 0
+                dll_i.num -= 1
+                dll_j.num += 1
+            elif dll_j.num == 1:
+                i_head = dll_i.pop_front()
+                dll_j.push_front(i_head)
+                dll_i.num -= 1
+                dll_j.num += 1
             else:
-                connect(dll_i.tail, dll_j.head)
-                dll_j.head = dll_i.head
-                dll_i.head, dll_i.tail = None, None
-                dll_j.num += dll_i.num
+                i_head = dll_i.pop_front()
+                dll_j.push_front(i_head)
+                dll_i.num -= 1
+                dll_j.num += 1
+        else:
+            if dll_j.num == 0:
+                dll_j.head, dll_j.tail = dll_i.head, dll_i.tail
+                dll_j.num = dll_i.num
                 dll_i.num = 0
-
+            elif dll_j.num == 1:
+                if dll_idx_i != dll_idx_j:
+                    connect(dll_i.tail, dll_j.head)
+                    dll_j.head = dll_i.head
+                    dll_i.head, dll_i.tail = None, None
+                    dll_j.num += dll_i.num
+                    dll_i.num = 0
+            else:
+                if dll_idx_i != dll_idx_j:
+                    connect(dll_i.tail, dll_j.head)
+                    dll_j.head = dll_i.head
+                    dll_i.head, dll_i.tail = None, None
+                    dll_j.num += dll_i.num
+                    dll_i.num = 0
     elif cmd == 4:
-        if dll_idx_i != dll_idx_j:
-            if dll_i.num == 0:
-                pass
-            elif dll_i.num == 1:
+        if dll_i.num == 0:
+            pass
+        elif dll_i.num == 1:
+            if dll_j.num == 0:
                 i_head = dll_i.pop_front()
                 dll_j.push_back(i_head)
-                dll_j.num += dll_i.num
-                dll_i.num = 0
+                dll_i.num -= 1
+                dll_j.num += 1
+            elif dll_j.num == 1:
+                i_head = dll_i.pop_front()
+                dll_j.push_back(i_head)
+                dll_i.num -= 1
+                dll_j.num += 1
             else:
-                connect(dll_j.tail, dll_i.head)
-                dll_j.tail = dll_i.tail
-                dll_i.head, dll_i.tail = None, None
-                dll_j.num += dll_i.num
+                i_head = dll_i.pop_front()
+                dll_j.push_back(i_head)
+                dll_i.num -= 1
+                dll_j.num += 1
+        else:
+            if dll_j.num == 0:
+                dll_j.head, dll_j.tail = dll_i.head, dll_i.tail
+                dll_j.num = dll_i.num
                 dll_i.num = 0
-    else:
-        print(f"Wrong cmd: {cmd}")
+            elif dll_j.num == 1:
+                if dll_idx_i != dll_idx_j:
+                    connect(dll_j.tail, dll_i.head)
+                    dll_j.tail = dll_i.tail
+                    dll_i.head, dll_i.tail = None, None
+                    dll_j.num += dll_i.num
+                    dll_i.num = 0
+            else:
+                if dll_idx_i != dll_idx_j:
+                    connect(dll_j.tail, dll_i.head)
+                    dll_j.tail = dll_i.tail
+                    dll_i.head, dll_i.tail = None, None
+                    dll_j.num += dll_i.num
+                    dll_i.num = 0
 
-    # for dll in dll_list[1:]:
-    #     if dll.head is None:
-    #         print(0)
-    #     else:
-    #         print(dll.num, end=" ")
-    #         cur_node = dll.head
-    #         while True:
-    #             print(cur_node, end=" ")
-    #             if cur_node == dll.tail:
-    #                 print()
-    #                 break
-    #             else:
-    #                 cur_node = cur_node.next
-    # print()
+
 
 for dll in dll_list[1:]:
-    if dll.head is None:
+    if dll.num == 0:
         print(0)
     else:
         print(dll.num, end=" ")
