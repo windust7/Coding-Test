@@ -146,7 +146,8 @@ class DoublyLinkedList:
 
 queue_list = [DoublyLinkedList() for _ in range(num_queue)]
 node_dict = {}
-node_queue_dict = {}
+# node_queue_dict = {}
+node_queue_dict = [None for _ in range(num_people+1)]
 
 for queue_idx in range(num_queue):
     cur_queue = list(map(int, input().split()))
