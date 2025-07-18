@@ -202,8 +202,9 @@ for cmd_idx in range(num_cmd):
             node_a_queue.tail = node_a.prev
 
         cur_node = node_a
+        change_queue_idx = node_queue_dict[cur_cmd[3]]
         while True:
-            node_queue_dict[cur_node.data] = node_queue_dict[cur_cmd[3]]
+            node_queue_dict[cur_node.data] = change_queue_idx
             if cur_node == node_b:
                 break
             else:
