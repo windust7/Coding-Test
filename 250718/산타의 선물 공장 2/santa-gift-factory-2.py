@@ -234,11 +234,11 @@ def action_4(cmd_list):
             if dst_belt.num_node == 0:
                 dst_belt.head = move_start_gift
                 dst_belt.tail = move_end_gift
-            elif dst_belt_num_node == 1:
-                conect(move_end_gift, dst_belt.head)
+            elif dst_belt.num_node == 1:
+                connect(move_end_gift, dst_belt.head)
                 dst_belt.head = move_start_gift
             else:
-                conect(move_end_gift, dst_belt.head)
+                connect(move_end_gift, dst_belt.head)
                 dst_belt.head = move_start_gift
 
         src_belt.num_node -= num_move
