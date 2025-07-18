@@ -48,8 +48,10 @@ class DoublyLinkedList:
             self.tail = new_node
 
     def action_1(self, node_b, node_a):
+        next_prev, next_next = node_b.prev, node_b.next
         disconnect(node_b.prev, node_b)
         disconnect(node_b, node_b.next)
+        connect(next_prev, next_next)
         if self.head is None:
             pass
         elif self.head == self.tail:
@@ -88,8 +90,10 @@ class DoublyLinkedList:
                 connect(original_prev, original_next)
 
     def action_3(self, node_b, node_c, node_a):
+        next_prev, next_next = node_b.prev, node_c.next
         disconnect(node_b.prev, node_b)
         disconnect(node_c, node_c.next)
+        connect(next_prev, next_next)
         if self.head is None:
             pass
         elif self.head == self.tail:
@@ -156,7 +160,15 @@ for cmd_idx in range(num_cmd):
             print(f"{cur_cmd[1]} -> {cur_cmd[2]}")
         node_a = node_dict[cur_cmd[1]]
         node_a_queue = queue_list[node_queue_dict[cur_cmd[1]]]
-        node_a_queue.pop(node_a)
+        # node_a_queue.pop(node_a)
+        if node_a == node_a_queue.head:
+            if node_a_queue.head == node_a_queue.tail:
+                node_a_queue.head = None
+                node_a_queue.tail = None
+            else:
+                node_a_queue.head = node_a.next
+        elif node_a == node_a_queue.tail:
+            node_a_queue.tail = node_a.prev
         node_b = node_dict[cur_cmd[2]]
         node_b_queue = queue_list[node_queue_dict[cur_cmd[2]]]
         node_b_queue.action_1(node_a, node_b)
@@ -187,7 +199,6 @@ for cmd_idx in range(num_cmd):
             node_a_queue.tail = node_a.prev
 
         cur_node = node_a
-
         while True:
             node_queue_dict[cur_node.data] = node_queue_dict[cur_cmd[3]]
             if cur_node == node_b:
@@ -203,6 +214,6 @@ for cmd_idx in range(num_cmd):
         for queue in queue_list:
             queue.result_print()
         print()
-        
+
 for queue in queue_list:
     queue.result_print()
