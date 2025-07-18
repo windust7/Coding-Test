@@ -142,13 +142,15 @@ def action_2(cmd_list):
         src_belt.num_node = 0
         dst_belt.push_front(move_gift)
     else:
-        move_start = src_belt.head
-        move_end = src_belt.tail
-        src_belt.head = None
-        src_belt.tail = None
+        move_start, move_end = src_belt.head, src_belt.tail
+        src_belt.head = src_belt.tail = None
 
-        connect(move_end, dst_belt.head)
-        dst_belt.head = move_start
+        if dst_belt.num_node == 0:
+            dst_belt.head = move_start
+            dst_belt.tail = move_end
+        else:
+            connect(move_end, dst_belt.head)
+            dst_belt.head = move_start
 
         dst_belt.num_node += src_belt.num_node
         src_belt.num_node = 0
@@ -237,7 +239,6 @@ def action_4(cmd_list):
             elif dst_belt.num_node == 1:
                 connect(move_end_gift, dst_belt.head)
                 dst_belt.head = move_start_gift
-                dst_belt.tail = dst_belt.head.next
             else:
                 connect(move_end_gift, dst_belt.head)
                 dst_belt.head = move_start_gift
