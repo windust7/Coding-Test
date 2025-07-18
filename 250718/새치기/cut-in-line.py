@@ -5,6 +5,9 @@ N명의 사람들이 M개의 줄에 나눠서 줄을 서고 있다
 2 a:        a번의 사람이 없어졌다
 3 a b c:    a번부터 b번까지 c번 앞으로 새치기 했다 (순서 유지)
 """
+import sys
+
+input = sys.stdin.readline
 
 CHECK = False
 
