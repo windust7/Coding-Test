@@ -69,7 +69,7 @@ class CirclyLinkedList:
                 disconnect(self.head, next_head)
                 connect(original_tail, next_head)
                 self.head = next_head
-                print(f"{original_tail.data} {self.head.data}")
+                print(f"{self.head.data} {original_tail.data}")
                 self.num_node -= 1
             else:
                 left_node = pop_node.next
