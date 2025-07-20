@@ -121,8 +121,8 @@ def choose_target():
 
     target = alive_player_list[0]
 
-    # if target[5]:
-    #     target = alive_player_list[1]
+    if target[5]:
+        target = alive_player_list[1]
 
     target[6] = True
 
@@ -262,6 +262,9 @@ for cur_turn in range(1, num_turn+1):
     if CHECK:
         print("power_up_and_initialize")
         visualize()
+
+    if len(alive_player_list) == 1:
+        break
 
 biggest_power = find_biggest_power()
 print(biggest_power)
