@@ -121,8 +121,8 @@ def choose_target():
 
     target = alive_player_list[0]
 
-    if target[5]:
-        target = alive_player_list[1]
+    # if target[5]:
+    #     target = alive_player_list[1]
 
     target[6] = True
 
